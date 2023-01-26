@@ -34,6 +34,10 @@ public class Product {
 	private int stock;
 	@Column
 	private String image;
+	@Column
+	private String description;
+	@Column
+	private String reviews;
 
 	public Product(int id) {
 		super();
@@ -45,7 +49,7 @@ public class Product {
 
 
 	public Product(int id, @NotEmpty String name, @NotEmpty String brand, @NotNull @Positive int price,
-			@NotNull @PositiveOrZero int stock, String image) {
+			@NotNull @PositiveOrZero int stock, String image,String description) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -53,17 +57,19 @@ public class Product {
 		this.price = price;
 		this.stock = stock;
 		this.image = image;
+		this.description = description;
 	}
 	
 
 	public Product(@NotEmpty String name, @NotEmpty String brand, @NotNull @Positive int price,
-			@NotNull @PositiveOrZero int stock, String image) {
+			@NotNull @PositiveOrZero int stock, String image,String description) {
 		super();
 		this.name = name;
 		this.brand = brand;
 		this.price = price;
 		this.stock = stock;
 		this.image = image;
+		this.description = description;
 	}
 
 
@@ -120,16 +126,22 @@ public class Product {
 		this.image = image;
 	}
 
-	
-	
-	/**
-	 * toString
-	 */
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public String getReviews() {
+		return reviews;
+	}
+	public void setReviews(String reviews) {
+		this.reviews = reviews;
+	}
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", brand=" + brand + ", price=" + price + ", stock=" + stock
-				+ ", image=" + image + "]";
+				+ ", image=" + image + ", description=" + description + ", reviews=" + reviews + "]";
 	}
-	
 	
 }

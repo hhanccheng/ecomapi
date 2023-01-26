@@ -39,6 +39,8 @@ public class ProductService {
 		p.setPrice(product.getPrice());
 		p.setName(product.getName());
 		p.setStock(product.getStock());
+		p.setDescription(product.getDescription());
+		p.setReviews(product.getReviews());
 		productDao.save(p);
 		return new Response(true);
 	}
