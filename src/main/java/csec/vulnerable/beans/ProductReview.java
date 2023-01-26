@@ -17,8 +17,8 @@ import jakarta.persistence.Table;
 @Table(name = "ecom_product_review")
 public class ProductReview {
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "PRODUCT_REVIEWS_SEQ")
-	@SequenceGenerator(name = "PRODUCT_REVIEWS_SEQ",sequenceName = "ECOM_PRODUCT_REVIEWS_SEQ",allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "PRODUCT_REVIEW_SEQ")
+	@SequenceGenerator(name = "PRODUCT_REVIEW_SEQ",sequenceName = "ECOM_PRODUCT_REVIEW_SEQ",allocationSize = 1)
 	private int id;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "product_id")

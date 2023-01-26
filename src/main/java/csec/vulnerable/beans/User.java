@@ -44,7 +44,9 @@ private static final long serialVersionUID = 1L;
 	private UserInfo userInfo;
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private List<ProductReview> myreviews;
-
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	private List<Payment> mypayments;
+			
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
@@ -128,5 +130,10 @@ private static final long serialVersionUID = 1L;
 	public void setMyreviews(List<ProductReview> myreviews) {
 		this.myreviews = myreviews;
 	}
-
+	public List<Payment> getMypayments() {
+		return mypayments;
+	}
+	public void setMypayments(List<Payment> mypayments) {
+		this.mypayments = mypayments;
+	}
 }
