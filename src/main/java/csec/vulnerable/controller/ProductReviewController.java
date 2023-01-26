@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,44 +14,43 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import csec.vulnerable.beans.ShoppingCart;
+import csec.vulnerable.beans.ProductReview;
 import csec.vulnerable.http.Response;
-import csec.vulnerable.service.ShoppingCartService;
+import csec.vulnerable.service.ProductReviewService;
 
 @RestController()
-@RequestMapping("/shoppingcarts")
-public class ShoppingCartController {
+@RequestMapping("/productreviews")
+public class ProductReviewController {
 	@Autowired
-	ShoppingCartService shoppingCartService;
+	ProductReviewService productReviewService;
 	
 	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_USER','ROLE_SELLER')")
 	@GetMapping("/{id}")
-	public ShoppingCart getProduct(@PathVariable int id) {
-		return shoppingCartService.getShoppingCart(id);
+	public ProductReview getProduct(@PathVariable int id) {
+		return productReviewService.getProductReview(id);
 	}
 	
 	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_USER','ROLE_SELLER')")
 	@GetMapping
-	public List<ShoppingCart> getShoppingCarts() {
-		return shoppingCartService.getShoppingCarts();
+	public List<ProductReview> getProductReviews() {
+		return productReviewService.getProductReviews();
 	}
 	
 	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_USER','ROLE_SELLER')")
 	@PostMapping
-	public Response addShoppingCart(@RequestBody ShoppingCart ShoppingCart) {
-		return shoppingCartService.addShoppingCart(ShoppingCart);
+	public Response addProductReview(@RequestBody ProductReview productReview,Authentication authentication) {
+		return productReviewService.addProductReview(productReview,authentication);
 	}
 	
 	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_USER','ROLE_SELLER')")
 	@PutMapping
-	public Response changeShoppingCart(@RequestBody ShoppingCart ShoppingCart) {
-		return shoppingCartService.changeShoppingCart(ShoppingCart);
+	public Response changeProductReview(@RequestBody ProductReview productReview,Authentication authentication) {
+		return productReviewService.changeProductReview(productReview,authentication);
 	}
 	
 	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_USER','ROLE_SELLER')")
 	@DeleteMapping("/{id}")
-	public Response deleteShoppingCart(@PathVariable int id) {
-		return shoppingCartService.deleteShoppingCart(id);
+	public Response deleteProductReview(@PathVariable int id,Authentication authentication) {
+		return productReviewService.deleteProductReview(id, authentication);
 	}
 }
-

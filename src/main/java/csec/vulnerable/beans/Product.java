@@ -1,16 +1,22 @@
 package csec.vulnerable.beans;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import java.util.List;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 
 @Entity 
 @Table(name = "ecom_product")
@@ -36,8 +42,8 @@ public class Product {
 	private String image;
 	@Column
 	private String description;
-	@Column
-	private String reviews;
+	@OneToMany(mappedBy = "product",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	private List<ProductReview> reviews;
 
 	public Product(int id) {
 		super();
@@ -132,16 +138,18 @@ public class Product {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getReviews() {
+	public List<ProductReview> getReviews() {
 		return reviews;
 	}
-	public void setReviews(String reviews) {
+	public void setReviews(List<ProductReview> reviews) {
 		this.reviews = reviews;
 	}
+	
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", brand=" + brand + ", price=" + price + ", stock=" + stock
 				+ ", image=" + image + ", description=" + description + ", reviews=" + reviews + "]";
 	}
+	
 	
 }

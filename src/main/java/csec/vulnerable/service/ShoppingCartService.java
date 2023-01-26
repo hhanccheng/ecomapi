@@ -33,13 +33,13 @@ public class ShoppingCartService {
 	}
 	
 	//post
-	public Response addShoppingCart(ShoppingCart ShoppingCart) {
-		int leftStock = productDao.findById(ShoppingCart.getProduct().getId()).get().getStock() - ShoppingCart.getQuantity();
+	public Response addShoppingCart(ShoppingCart shoppingCart) {
+		int leftStock = productDao.findById(shoppingCart.getProduct().getId()).get().getStock() - shoppingCart.getQuantity();
 		if(leftStock >= 0) {
-			productDao.findById(ShoppingCart.getProduct().getId()).get().setStock(leftStock);
-			productDao.save(productDao.findById(ShoppingCart.getProduct().getId()).get());
-			ShoppingCart.setProduct(productDao.findById(ShoppingCart.getProduct().getId()).get());
-			shoppingCartDao.save(ShoppingCart);
+			productDao.findById(shoppingCart.getProduct().getId()).get().setStock(leftStock);
+			productDao.save(productDao.findById(shoppingCart.getProduct().getId()).get());
+			shoppingCart.setProduct(productDao.findById(shoppingCart.getProduct().getId()).get());
+			shoppingCartDao.save(shoppingCart);
 			return new Response(true);
 		}else {
 			return new Response(false, "Out the stock :" + leftStock);
